@@ -4,9 +4,9 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-class PostsResponse : ArrayList<PostsResponseItem>()
+class PostsResponse : ArrayList<Post>()
 
-data class PostsResponseItem(
+data class Post(
     @Expose @SerializedName("body")
     val body: String,
     @Expose @SerializedName("id")
