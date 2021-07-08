@@ -9,16 +9,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_5dp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/title_text_size" />
+        android:textStyle="bold"
+        android:background="?android:attr/colorBackground"
+        android:textSize="@dimen/text_size_15" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_5dp"
-        android:textColor="@color/secondary_text"
-        android:textSize="@dimen/post_text_size" />
+        android:paddingStart="@dimen/padding_5dp"
+        android:paddingEnd="@dimen/padding_5dp"
+        android:paddingBottom="@dimen/padding_5dp"
+        android:background="?android:attr/colorBackground"
+        android:textSize="@dimen/text_size_14" />
 
 
 </LinearLayout>
