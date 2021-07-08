@@ -11,13 +11,22 @@
         android:label="fragment_posts"
         tools:layout="@layout/fragment_posts">
 
-      <!--  <action
-            android:id="@+id/action_navigate_qrResult"
-            app:destination="@id/qrResultFragment"
+        <action
+            android:id="@+id/action_navigate_comment"
+            app:destination="@id/commentFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@anim/fade_out"/>-->
+            app:popExitAnim="@anim/fade_out" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.journey.comments.presentation.ui.fragments.CommentFragment"
+        android:label="fragment_comments"
+        tools:layout="@layout/fragment_comments">
+
 
     </fragment>
 

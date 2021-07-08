@@ -15,13 +15,13 @@ abstract class PostsDomainModule {
 
     @Binds
     abstract fun bindsRepository(
-        repoImpl: PostsRepositoryImpl
+            repoImpl: PostsRepositoryImpl
     ): PostsRepository
 
 
     @Binds
     abstract fun bindsPostsUseCase(
-        mPostsUseCase: PostsUseCaseImpl
+            mPostsUseCase: PostsUseCaseImpl
     ): PostsUseCase
 
 

@@ -38,7 +38,7 @@ class PostsRemoteDataSourceTest {
         }
 
         dataSource =
-            PostsRemoteDataSourceImpl(service, mainCoroutineRule.coroutineContext)
+                PostsRemoteDataSourceImpl(service, mainCoroutineRule.coroutineContext)
 
         val result = dataSource.getPosts()
 
@@ -51,7 +51,7 @@ class PostsRemoteDataSourceTest {
             onBlocking {
                 getPostsAsync()
             } doReturn GlobalScope.async {
-               throw Exception()
+                throw Exception()
             }
         }
 

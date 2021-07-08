@@ -7,11 +7,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.journey.R
 import com.journey.common.BaseFragment
+import com.journey.common.RecyclerViewExtension
 import com.journey.common.Result
 import com.journey.common.Status
 import com.journey.posts.data.remote.models.PostsResponse
@@ -37,7 +35,6 @@ class PostsFragment : BaseFragment() {
         lifecycleScope.launchWhenStarted {
             try {
                 setViews()
-                mPostsViewModel.fetchPosts()
                 observePostsLiveData()
 
             } finally {
@@ -51,21 +48,7 @@ class PostsFragment : BaseFragment() {
     }
 
     private fun setViews() {
-        val layoutManager = LinearLayoutManager(
-            requireContext(),
-            RecyclerView.VERTICAL,
-            false
-        ).apply {
-            rvPosts.layoutManager = this
-        }
-
-        DividerItemDecoration(
-            requireContext(),
-            layoutManager.orientation
-        ).apply {
-            rvPosts.addItemDecoration(this)
-        }
-
+        RecyclerViewExtension.setItemDecoration(rvPosts)
         rvPosts.adapter = postsAdapter
         postsAdapter.handleClickAction { postItem, i ->
 
@@ -81,8 +64,8 @@ class PostsFragment : BaseFragment() {
         })
     }
 
-    private fun postsObserver(it: Result<PostsResponse>) {
-        when (it.status) {
+    private fun postsObserver(result: Result<PostsResponse>) {
+        when (result.status) {
             Status.LOADING -> {
                 showLoader()
             }
@@ -91,7 +74,7 @@ class PostsFragment : BaseFragment() {
             }
             Status.SUCCESS -> {
                 hideLoader()
-                it.data?.let { posts ->
+                result.data?.let { posts ->
                     if (posts.isNotEmpty())
                         postsAdapter.updatePosts(posts)
 

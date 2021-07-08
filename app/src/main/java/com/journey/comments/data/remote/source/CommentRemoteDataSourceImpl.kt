@@ -1,20 +1,20 @@
-package com.journey.posts.data.remote.source
+package com.journey.comments.data.remote.source
 
+import com.journey.comments.data.remote.models.CommentResponse
+import com.journey.comments.data.remote.services.CommentService
 import com.journey.di.qualifiers.IO
-import com.journey.posts.data.remote.models.PostsResponse
-import com.journey.posts.data.remote.services.PostsService
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 
-class PostsRemoteDataSourceImpl @Inject constructor(
-        private val service: PostsService,
+class CommentRemoteDataSourceImpl @Inject constructor(
+        private val service: CommentService,
         @IO private val context: CoroutineContext
-) : PostsRemoteDataSource {
-    override suspend fun getPosts(): PostsResponse =
+) : CommentRemoteDataSource {
+    override suspend fun getComments(postId: Int): CommentResponse =
             withContext(context) {
-                val response = service.getPostsAsync().await()
+                val response = service.getCommentsAsync(postId).await()
                 if (response.isSuccessful)
                     response.body() ?: throw Exception("no response")
                 else

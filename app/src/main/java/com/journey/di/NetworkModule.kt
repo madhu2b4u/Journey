@@ -39,11 +39,11 @@ class NetworkModule {
     @Provides
     fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BuildConfig.BASE_URL)
-            .client(okHttpClient)
-            .build()
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(BuildConfig.BASE_URL)
+                .client(okHttpClient)
+                .build()
     }
 
 
