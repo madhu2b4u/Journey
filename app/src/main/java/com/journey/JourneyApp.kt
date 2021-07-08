@@ -10,10 +10,6 @@ class JourneyApp : Application() {
 
     var mDataStore: DataStore<Preferences>? = null
 
-    override fun onCreate() {
-        super.onCreate()
-    }
-
     fun getDataStore(): DataStore<Preferences>? {
         return mDataStore
     }

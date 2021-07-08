@@ -1,9 +1,9 @@
 package com.journey.di
 
-import com.journey.di.qualifiers.IO
-import com.journey.di.qualifiers.MainThread
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.journey.BuildConfig
+import com.journey.di.qualifiers.IO
+import com.journey.di.qualifiers.MainThread
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +19,7 @@ import kotlin.coroutines.CoroutineContext
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule  {
+class NetworkModule {
 
     @Singleton
     @Provides

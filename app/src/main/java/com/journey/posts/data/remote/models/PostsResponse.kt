@@ -7,12 +7,12 @@ import java.io.Serializable
 class PostsResponse : ArrayList<PostsResponseItem>()
 
 data class PostsResponseItem(
-        @Expose @SerializedName("body")
-        val body: String,
-        @Expose @SerializedName("id")
-        val id: Int,
-        @Expose @SerializedName("title")
-        val title: String,
-        @Expose @SerializedName("userId")
-        val userId: Int
-): Serializable
+    @Expose @SerializedName("body")
+    val body: String,
+    @Expose @SerializedName("id")
+    val id: Int,
+    @Expose @SerializedName("title")
+    val title: String,
+    @Expose @SerializedName("userId")
+    val userId: Int
+) : Serializable

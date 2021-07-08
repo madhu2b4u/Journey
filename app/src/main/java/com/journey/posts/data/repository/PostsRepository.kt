@@ -1,8 +1,8 @@
 package com.journey.posts.data.repository
 
 import androidx.lifecycle.LiveData
-import com.journey.posts.data.remote.models.PostsResponse
 import com.journey.common.Result
+import com.journey.posts.data.remote.models.PostsResponse
 
 
 interface PostsRepository {
