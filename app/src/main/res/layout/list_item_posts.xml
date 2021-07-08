@@ -8,19 +8,19 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_5dp"
-        android:textStyle="bold"
         android:background="?android:attr/colorBackground"
-        android:textSize="@dimen/text_size_15" />
+        android:padding="@dimen/padding_5dp"
+        android:textSize="@dimen/text_size_15"
+        android:textStyle="bold" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="?android:attr/colorBackground"
         android:paddingStart="@dimen/padding_5dp"
         android:paddingEnd="@dimen/padding_5dp"
         android:paddingBottom="@dimen/padding_5dp"
-        android:background="?android:attr/colorBackground"
         android:textSize="@dimen/text_size_14" />
 
 

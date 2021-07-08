@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Journey</string>
-    <string name="post">Post</string>
+    <string name="posts">Posts</string>
     <string name="comments">Comments</string>
+    <string name="search_comments">Search comments</string>
+    <string name="search_posts">Search posts</string>
 </resources>

@@ -5,23 +5,38 @@
     android:background="?android:attr/colorBackground"
     android:orientation="vertical">
 
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_30"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_30"
+        android:layout_marginBottom="@dimen/margin_16dp"
+        android:background="@drawable/bg_border_search"
+        android:drawableEnd="@drawable/baseline_search_deep_purple_100_24dp"
+        android:hint="@string/search_comments"
+        android:padding="@dimen/margin_10dp"
+        android:textColorHint="?android:attr/textColorSecondary" />
+
     <include layout="@layout/list_item_posts" />
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_5dp"
-        android:textStyle="bold"
-        android:textColor="?android:attr/textColorSecondary"
         android:text="@string/comments"
-        android:textSize="@dimen/text_size_16" />
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="@dimen/text_size_16"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/loader"
@@ -30,11 +45,10 @@
             android:indeterminate="true" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCommetns"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
-            android:id="@+id/rvCommetns"
-             />
+            android:visibility="gone" />
 
 
     </LinearLayout>
