@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <com.google.android.material.textview.MaterialTextView
-        android:layout_width="wrap_content"
         android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="@dimen/padding_5dp"
         android:textColor="@color/black"
-        android:textSize="@dimen/title_text_size"
-        android:layout_height="wrap_content"/>
+        android:textSize="@dimen/title_text_size" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:layout_width="wrap_content"
         android:id="@+id/tvPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:padding="@dimen/padding_5dp"
         android:textColor="@color/secondary_text"
-        android:textSize="@dimen/post_text_size"
-        android:layout_height="wrap_content"/>
+        android:textSize="@dimen/post_text_size" />
 
 
 </LinearLayout>

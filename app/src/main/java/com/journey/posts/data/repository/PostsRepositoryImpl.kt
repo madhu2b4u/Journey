@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 
 class PostsRepositoryImpl @Inject constructor(
-    private val remoteDataSource: PostsRemoteDataSource
+        private val remoteDataSource: PostsRemoteDataSource
 ) : PostsRepository {
 
     override suspend fun getPosts() = liveData {

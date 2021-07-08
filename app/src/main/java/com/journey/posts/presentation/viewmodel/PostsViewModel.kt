@@ -13,10 +13,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PostsViewModel @Inject constructor(
-    private val mPostsUseCase: PostsUseCase
+        private val mPostsUseCase: PostsUseCase
 ) : ViewModel() {
 
     val postsResult = MediatorLiveData<Event<Result<PostsResponse>>>()
+
+    init {
+        fetchPosts()
+    }
 
     fun fetchPosts() {
         viewModelScope.launch {

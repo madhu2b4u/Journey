@@ -1,15 +1,15 @@
-package com.journey.posts
+package com.journey.comments
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.liveData
 import com.journey.LiveDataTestUtil
 import com.journey.MainCoroutineRule
 import com.journey.TestUtils
+import com.journey.comments.data.repository.CommentRepository
+import com.journey.comments.domain.CommentUseCase
+import com.journey.comments.domain.CommentUseCaseImpl
 import com.journey.common.Result
 import com.journey.common.Status
-import com.journey.posts.data.repository.PostsRepository
-import com.journey.posts.domain.PostsUseCase
-import com.journey.posts.domain.PostsUseCaseImpl
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -18,7 +18,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class PostsUseCaseTest {
+class CommentsUseCaseTest {
     @ExperimentalCoroutinesApi
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
@@ -27,64 +27,64 @@ class PostsUseCaseTest {
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
-    lateinit var useCase: PostsUseCase
+    lateinit var useCase: CommentUseCase
 
-    lateinit var repository: PostsRepository
+    lateinit var repository: CommentRepository
 
-    private val postData = TestUtils.postsResponse
+    private val commentsData = TestUtils.commentsResponse
 
     @Test
-    fun testGetPostsLoading() = mainCoroutineRule.runBlockingTest {
+    fun testGetCommentsForPostLoading() = mainCoroutineRule.runBlockingTest {
 
         repository = mock {
             onBlocking {
-                getPosts()
+                getComments(1)
             } doReturn liveData {
                 emit(Result.loading())
             }
         }
 
-        useCase = PostsUseCaseImpl(repository)
+        useCase = CommentUseCaseImpl(repository)
 
-        val result = useCase.getPosts()
+        val result = useCase.getComments(1)
 
         assert(LiveDataTestUtil.getValue(result).status == Status.LOADING)
     }
 
     @Test
-    fun testGetPostDetailsSuccess() = mainCoroutineRule.runBlockingTest {
+    fun testGGetCommentsForPostSuccess() = mainCoroutineRule.runBlockingTest {
 
         repository = mock {
             onBlocking {
-                getPosts()
+                getComments(1)
             } doReturn liveData {
-                emit(Result.success(postData))
+                emit(Result.success(commentsData))
             }
         }
 
-        useCase = PostsUseCaseImpl(repository)
+        useCase = CommentUseCaseImpl(repository)
 
-        val result = useCase.getPosts()
+        val result = useCase.getComments(1)
         assert(
-                LiveDataTestUtil.getValue(result).data == postData &&
+                LiveDataTestUtil.getValue(result).data == commentsData &&
                         LiveDataTestUtil.getValue(result).status == Status.SUCCESS
         )
     }
 
     @Test
-    fun testGetPostDetailsErrorData() = mainCoroutineRule.runBlockingTest {
+    fun testGetCommentsForPostErrorData() = mainCoroutineRule.runBlockingTest {
         repository = mock {
-            onBlocking { getPosts() } doReturn liveData {
-                emit(Result.error("Posts not found"))
+            onBlocking { getComments(1) } doReturn liveData {
+                emit(Result.error("Comments not found"))
             }
         }
-        useCase = PostsUseCaseImpl(repository)
-        val result = useCase.getPosts()
+        useCase = CommentUseCaseImpl(repository)
+        val result = useCase.getComments(1)
         result.observeForever { }
         assert(
                 LiveDataTestUtil.getValue(result).status == Status.ERROR && LiveDataTestUtil.getValue(
                         result
-                ).message == "Posts not found"
+                ).message == "Comments not found"
         )
 
     }

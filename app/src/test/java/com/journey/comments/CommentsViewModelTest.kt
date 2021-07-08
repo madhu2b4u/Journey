@@ -1,4 +1,4 @@
-package com.journey.posts
+package com.journey.comments
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
@@ -6,11 +6,11 @@ import androidx.lifecycle.liveData
 import com.journey.LiveDataTestUtil
 import com.journey.MainCoroutineRule
 import com.journey.TestUtils
+import com.journey.comments.data.remote.models.CommentResponse
+import com.journey.comments.domain.CommentUseCase
+import com.journey.comments.presentation.viewmodel.CommentViewModel
 import com.journey.common.Result
 import com.journey.common.Status
-import com.journey.posts.data.remote.models.PostsResponse
-import com.journey.posts.domain.PostsUseCase
-import com.journey.posts.presentation.viewmodel.PostsViewModel
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -20,7 +20,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @ExperimentalCoroutinesApi
-class PostsViewModelTest {
+class CommentsViewModelTest {
     @ExperimentalCoroutinesApi
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
@@ -29,11 +29,11 @@ class PostsViewModelTest {
     @get:Rule
     var instantExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var useCase: PostsUseCase
+    private lateinit var useCase: CommentUseCase
 
-    private lateinit var viewModel: PostsViewModel
+    private lateinit var viewModel: CommentViewModel
 
-    private val postData = TestUtils.postsResponse
+    private val commentsData = TestUtils.commentsResponse
 
 
     @Before
@@ -42,55 +42,55 @@ class PostsViewModelTest {
     }
 
     @Test
-    fun testGetPostsLoadingData() = mainCoroutineRule.runBlockingTest {
+    fun testGetCommentsForPostLoadingData() = mainCoroutineRule.runBlockingTest {
         useCase = mock {
-            onBlocking { getPosts() } doReturn liveData {
+            onBlocking { getComments(1) } doReturn liveData {
                 emit(Result.loading())
             }
         }
-        viewModel = PostsViewModel(useCase)
-        viewModel.fetchPosts()
-        val result = viewModel.postsResult
+        viewModel = CommentViewModel(useCase)
+        viewModel.fetchCommentsToPost(1)
+        val result = viewModel.commentResult
         result.observeForever { }
         kotlinx.coroutines.delay(2000)
         assert(LiveDataTestUtil.getValue(result).peekContent().status == Status.LOADING)
     }
 
     @Test
-    fun testGetPostsSuccessData() = mainCoroutineRule.runBlockingTest {
+    fun testGetCommentsForPostSuccessData() = mainCoroutineRule.runBlockingTest {
 
         useCase = mock {
-            onBlocking { getPosts() } doReturn liveData {
-                emit(Result.success(postData))
+            onBlocking { getComments(1) } doReturn liveData {
+                emit(Result.success(commentsData))
             }
         }
 
-        viewModel = PostsViewModel(useCase)
-        viewModel.fetchPosts()
+        viewModel = CommentViewModel(useCase)
+        viewModel.fetchCommentsToPost(1)
 
-        val result = viewModel.postsResult
+        val result = viewModel.commentResult
         result.observeForever {}
         kotlinx.coroutines.delay(2000)
         assert(
                 LiveDataTestUtil.getValue(result).peekContent().status == Status.SUCCESS &&
-                        LiveDataTestUtil.getValue(result).peekContent().data == postData
+                        LiveDataTestUtil.getValue(result).peekContent().data == commentsData
         )
     }
 
     @Test
-    fun testGetPostsErrorData() = mainCoroutineRule.runBlockingTest {
+    fun testGetCommentsForPostErrorData() = mainCoroutineRule.runBlockingTest {
         useCase = mock {
-            onBlocking { getPosts() } doReturn object :
-                    LiveData<Result<PostsResponse>>() {
+            onBlocking { getComments(1) } doReturn object :
+                    LiveData<Result<CommentResponse>>() {
                 init {
                     value = Result.error("error")
                 }
             }
         }
 
-        viewModel = PostsViewModel(useCase)
-        viewModel.fetchPosts()
-        val result = viewModel.postsResult
+        viewModel = CommentViewModel(useCase)
+        viewModel.fetchCommentsToPost(1)
+        val result = viewModel.commentResult
         result.observeForever {}
         kotlinx.coroutines.delay(2000)
         assert(

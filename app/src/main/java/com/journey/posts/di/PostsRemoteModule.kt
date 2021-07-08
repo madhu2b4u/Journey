@@ -20,12 +20,12 @@ class PostsRemoteModule {
     interface Binders {
         @Binds
         fun bindsRemoteSource(
-            remoteDataSourceImpl: PostsRemoteDataSourceImpl
+                remoteDataSourceImpl: PostsRemoteDataSourceImpl
         ): PostsRemoteDataSource
     }
 
     @Provides
     fun providesPostsService(retrofit: Retrofit): PostsService =
-        retrofit.create(PostsService::class.java)
+            retrofit.create(PostsService::class.java)
 
 }
