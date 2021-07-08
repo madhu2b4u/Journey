@@ -100,12 +100,12 @@ class PostsFragment : BaseFragment() {
         }
     }
 
-    private fun showLoader(){
+    private fun showLoader() {
         loader.visibility = View.GONE
         rvPosts.visibility = View.VISIBLE
     }
 
-    private fun hideLoader(){
+    private fun hideLoader() {
         loader.visibility = View.GONE
         rvPosts.visibility = View.VISIBLE
     }

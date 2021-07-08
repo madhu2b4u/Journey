@@ -10,17 +10,17 @@ import kotlinx.android.synthetic.main.list_item_posts.view.*
 import javax.inject.Singleton
 
 @Singleton
-class PostsAdapter() : RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
+class PostsAdapter : RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
 
     private var posts = ArrayList<Post>()
 
-    private var clickFunction: ((post: Post, pos:Int) -> Unit)? = null
+    private var clickFunction: ((post: Post, pos: Int) -> Unit)? = null
 
     fun handleClickAction(clickFunction: (Post, Int) -> Unit) {
         this.clickFunction = clickFunction
     }
 
-    fun updatePosts(categories : ArrayList<Post>){
+    fun updatePosts(categories: ArrayList<Post>) {
         this.posts = categories
         notifyDataSetChanged()
     }
@@ -36,16 +36,16 @@ class PostsAdapter() : RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
     }
 
     override fun onBindViewHolder(holderSuggested: PostsViewHolder, position: Int) {
-        return holderSuggested.bind(posts[position],position)
+        return holderSuggested.bind(posts[position], position)
     }
 
     inner class PostsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(post: Post, pos:Int) {
+        fun bind(post: Post, pos: Int) {
             with(itemView) {
                 tvTitle.text = post.title
                 tvPost.text = post.body
                 setOnClickListener {
-                    clickFunction?.invoke(post,pos)
+                    clickFunction?.invoke(post, pos)
                 }
             }
 
