@@ -20,8 +20,8 @@ class PostsAdapter : RecyclerView.Adapter<PostsAdapter.PostsViewHolder>() {
         this.clickFunction = clickFunction
     }
 
-    fun updatePosts(categories: ArrayList<Post>) {
-        this.posts = categories
+    fun updatePosts(posts: ArrayList<Post>) {
+        this.posts = posts
         notifyDataSetChanged()
     }
 

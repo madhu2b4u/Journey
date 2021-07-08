@@ -7,11 +7,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import com.journey.R
 import com.journey.common.BaseFragment
 import com.journey.common.RecyclerViewExtension
 import com.journey.common.Result
 import com.journey.common.Status
+import com.journey.posts.data.remote.models.Post
 import com.journey.posts.data.remote.models.PostsResponse
 import com.journey.posts.presentation.ui.adapter.PostsAdapter
 import com.journey.posts.presentation.viewmodel.PostsViewModel
@@ -51,7 +53,7 @@ class PostsFragment : BaseFragment() {
         RecyclerViewExtension.setItemDecoration(rvPosts)
         rvPosts.adapter = postsAdapter
         postsAdapter.handleClickAction { postItem, i ->
-
+            navigateToPostComments(postItem)
         }
     }
 
@@ -83,9 +85,22 @@ class PostsFragment : BaseFragment() {
         }
     }
 
+    private fun navigateToPostComments(postItem: Post) {
+        view?.let {
+            Navigation.findNavController(it)
+                    .navigate(R.id.action_navigate_comment, prepareBundle(postItem))
+        }
+    }
+
+    private fun prepareBundle(post: Post): Bundle {
+        val bundle = Bundle()
+        bundle.putSerializable("post", post)
+        return bundle
+    }
+
     private fun showLoader() {
-        loader.visibility = View.GONE
-        rvPosts.visibility = View.VISIBLE
+        loader.visibility = View.VISIBLE
+        rvPosts.visibility = View.GONE
     }
 
     private fun hideLoader() {

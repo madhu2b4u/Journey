@@ -4,9 +4,9 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-class CommentResponse : ArrayList<CommentResponseItem>()
+class CommentResponse : ArrayList<Comments>()
 
-data class CommentResponseItem(
+data class Comments(
         @Expose @SerializedName("body")
         val body: String,
         @Expose @SerializedName("id")
